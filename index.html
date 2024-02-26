@@ -743,28 +743,29 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form id="contact-form" method="post" role="form" class="php-email-form">
               <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                </div>
+                  <div class="col-md-6 form-group">
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" required>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                      <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                  </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" required>
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" required>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
+                  <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
               </div>
               <div class="my-3">
-                <div class="loading">Cargando</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Lo lamento, tu mensaje no a sido enviado.</div>
+                  <div class="loading">Cargando</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Lo lamento, tu mensaje no ha sido enviado.</div>
               </div>
-              <div class="text-center"><button type="submit">Enviar</button></div>
-            </form>
+              <div class="text-center"><button type="submit" onclick="sendEmail()">Enviar</button></div>
+          </form>
+          
 
           </div>
 
@@ -817,6 +818,23 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Email JS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+      emailjs.init("2c5I0lH5D6nv4XIcZuvUC"); 
+  
+      function sendEmail() {
+          emailjs.sendForm("service_egl7qmn", "template_k47fjqq", "#contact-form")
+              .then(
+                  function(response) {
+                      console.log("Correo enviado con éxito:", response);
+                  },
+                  function(error) {
+                      console.log("Error al enviar el correo:", error);
+                  }
+              );
+      }
+  </script>
 </body>
 
 </html>
